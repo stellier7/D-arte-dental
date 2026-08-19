@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dentista en Tegucigalpa | D'Arte Dental — Centro Morazán</title>
 <meta name="description" content="D'Arte Dental, clínica dental en Centro Morazán, Tegucigalpa. Limpieza, blanqueamiento, ortodoncia, implantes y diseño de sonrisa. Agenda tu cita por WhatsApp.">
+<link rel="icon" href="images/logo.jpeg" type="image/jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -91,7 +92,8 @@ header{
 }
 header.scrolled{border-color:var(--line); padding:10px 0; background:rgba(246,241,231,0.96);}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;}
-.logo{font-family:'Fraunces',serif;font-weight:600;font-size:21px;letter-spacing:-0.01em;display:flex;align-items:baseline;gap:2px;}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:21px;letter-spacing:-0.01em;display:flex;align-items:center;gap:2px;}
+.logo-img{height:46px;width:auto;display:block;}
 .logo em{font-size:21px;}
 .nav-links{display:none;gap:32px;align-items:center;font-size:14px;font-weight:500;}
 @media(min-width:860px){.nav-links{display:flex;}}
@@ -253,39 +255,41 @@ section{position:relative;padding:96px 0;}
 
 /* ---------- ABOUT / DOCTOR ---------- */
 .about-grid{display:grid;gap:48px;align-items:center;}
-@media(min-width:920px){.about-grid{grid-template-columns:0.85fr 1.15fr;gap:64px;}}
-.about-photo{position:relative;aspect-ratio:4/5;border:1.5px solid var(--brass);padding:14px;}
-.about-photo.site-img-wrap .about-photo-inner{min-height:100%;}
-.about-photo-inner{
-  height:100%;width:100%;background:linear-gradient(160deg,#DCD3BC,#C9BE9F);
-  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--forest-deep);
-}
-.about-photo-inner svg{width:52px;height:52px;opacity:.55;}
-.about-photo-inner span{font-size:12.5px;text-align:center;padding:0 24px;letter-spacing:0.03em;color:var(--ink-soft);}
+@media(min-width:920px){.about-grid{grid-template-columns:1fr 1.1fr;gap:64px;}}
+.doctors-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.doctor-card{border:1.5px solid var(--brass);padding:12px;background:var(--canvas);}
+.doctor-photo{position:relative;aspect-ratio:3/4;overflow:hidden;}
+.doctor-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.doctor-info{margin-top:14px;text-align:center;}
+.doctor-info .name{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--forest);}
+.doctor-info .role{font-size:12.5px;color:var(--ink-soft);margin-top:4px;}
 .about-text p{color:var(--ink-soft);font-size:16.5px;margin-top:18px;}
 .about-text p:first-of-type{margin-top:20px;}
-.about-name{margin-top:22px;font-size:15px;font-weight:600;color:var(--forest);}
-.about-role{font-size:13px;color:var(--ink-soft);}
 
-/* ---------- GALLERY ---------- */
-.gallery-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr);}
-@media(min-width:700px){.gallery-grid{grid-template-columns:repeat(4,1fr);}}
-.gallery-item{
-  position:relative;aspect-ratio:1/1;overflow:hidden;border:1px solid var(--line);
-  background:linear-gradient(150deg,var(--canvas-alt),#E1D6BC);
+/* ---------- GALLERY — autoscroll marquee ---------- */
+#galeria{padding-bottom:72px;}
+.gallery-marquee{
+  overflow:hidden;width:100%;margin-top:8px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
 }
-.gallery-grid .gallery-item:nth-child(3n+1){aspect-ratio:1/1.25;}
-.gallery-item-inner{
-  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
-  transition:transform .6s cubic-bezier(.2,.8,.2,1);
+.gallery-track{display:flex;gap:18px;width:max-content;animation:gallery-scroll 45s linear infinite;}
+.gallery-marquee:hover .gallery-track{animation-play-state:paused;}
+.gallery-slide{
+  flex-shrink:0;width:min(78vw,340px);height:260px;
+  border:1px solid var(--line);overflow:hidden;background:var(--canvas-alt);
+  transition:border-color .35s;
 }
-.gallery-item:hover .gallery-item-inner{transform:scale(1.06);}
-.gallery-item-inner svg{width:30px;height:30px;color:var(--forest);opacity:0.55;}
-.gallery-item-inner span{font-size:11px;color:var(--ink-soft);text-align:center;padding:0 10px;letter-spacing:0.02em;}
-.gallery-item::before{
-  content:"";position:absolute;inset:0;border:1px solid transparent;transition:border-color .4s;z-index:2;pointer-events:none;
+.gallery-slide:hover{border-color:var(--brass);}
+.gallery-slide img{width:100%;height:100%;object-fit:cover;display:block;}
+@keyframes gallery-scroll{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(calc(-50% - 9px));}
 }
-.gallery-item:hover::before{border-color:var(--brass);}
+@media (prefers-reduced-motion:reduce){
+  .gallery-track{animation:none;flex-wrap:nowrap;overflow-x:auto;width:100%;padding:0 24px 8px;}
+  .gallery-marquee{-webkit-mask-image:none;mask-image:none;}
+}
 
 /* ---------- TESTIMONIALS ---------- */
 .test-grid{display:grid;gap:24px;grid-template-columns:1fr;}
@@ -429,7 +433,7 @@ body{padding-bottom:0;}
 <!-- ================= NAV ================= -->
 <header id="siteHeader">
   <div class="wrap nav-inner">
-    <a href="#top" class="logo">D<em>'</em>Arte <span style="color:var(--forest);">Dental</span></a>
+    <a href="#top" class="logo"><img src="images/logo.jpeg" alt="D'Arte Dental" class="logo-img"></a>
     <nav class="nav-links">
       <a href="#servicios">Servicios</a>
       <a href="#equipo">Equipo</a>
@@ -487,7 +491,7 @@ body{padding-bottom:0;}
     </div>
     <div class="hero-visual reveal reveal-delay-2">
       <div class="frame-card site-img-wrap" data-parallax data-speed="-0.08">
-        <img class="site-img" src="images/hero/hero-main.jpg" alt="Sonrisa en D'Arte Dental, Tegucigalpa" onerror="this.parentElement.classList.add('no-img')">
+        <img class="site-img" src="images/Hero.jpeg" alt="D'Arte Dental — Centro Morazán, Tegucigalpa">
         <div class="frame-card-content img-fallback">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21c-3-2-8-6-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5-5 9-8 11-.6.4-1.4.4-2 0z"/><path d="M9 10l1.5 2L14 8"/></svg>
           <span class="cap">Sonrisas que se sienten<br>propias</span>
@@ -599,11 +603,24 @@ body{padding-bottom:0;}
 <!-- ================= ABOUT ================= -->
 <section id="equipo" class="alt-bg">
   <div class="wrap about-grid">
-    <div class="about-photo reveal site-img-wrap">
-      <img class="site-img" src="images/team-photo.jpg" alt="Equipo D'Arte Dental en Centro Morazán" onerror="this.parentElement.classList.add('no-img')">
-      <div class="about-photo-inner img-fallback">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
-        <span>[Foto del equipo D'Arte Dental — sube team-photo.jpg]</span>
+    <div class="doctors-col reveal">
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="images/doctora-image.jpeg" alt="Dra. Katherine Duarte">
+        </div>
+        <div class="doctor-info">
+          <div class="name">Dra. Katherine Duarte</div>
+          <div class="role">Odontóloga</div>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="images/doctor-image.jpeg" alt="Dr. Jose Turcios">
+        </div>
+        <div class="doctor-info">
+          <div class="name">Dr. Jose Turcios</div>
+          <div class="role">Odontólogo</div>
+        </div>
       </div>
     </div>
     <div class="about-text reveal reveal-delay-1">
@@ -611,8 +628,7 @@ body{padding-bottom:0;}
       <h2 style="margin-top:14px;">Odontología pensada desde el primer contacto.</h2>
       <p>Sabemos que ir al dentista no siempre es fácil. Por eso en D'Arte Dental cuidamos cada detalle de la experiencia: explicamos cada paso, respondemos tus dudas sin apuro y adaptamos el tratamiento a lo que realmente necesitas — no solo a lo que "toca hacer".</p>
       <p>Nuestro consultorio en Centro Morazán está pensado para que te sientas cómodo desde que entras: un espacio tranquilo, ordenado y con la tecnología necesaria para diagnósticos precisos y tratamientos predecibles.</p>
-      <div class="about-name">Equipo D'Arte Dental</div>
-      <div class="about-role">Centro Morazán, Torre 1, Piso 6 — Tegucigalpa</div>
+      <p style="margin-top:18px;font-weight:600;color:var(--forest);">Centro Morazán, Torre 1, Piso 6 — Tegucigalpa</p>
     </div>
   </div>
 </section>
@@ -623,41 +639,24 @@ body{padding-bottom:0;}
     <div class="section-head reveal">
       <div class="eyebrow">La galería</div>
       <h2>Un vistazo a nuestro consultorio.</h2>
-      <p>Estas fotos son marcadores de posición — reemplázalas por fotos reales de la clínica, el equipo y algunos casos.</p>
+      <p>Conoce el espacio donde cuidamos tu sonrisa — en el corazón de Centro Morazán.</p>
     </div>
-    <div class="gallery-grid">
-      <div class="gallery-item reveal site-img-wrap">
-        <img class="site-img" src="images/gallery/recepcion.jpg" alt="Recepción D'Arte Dental" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-        <div class="gallery-item-inner img-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>recepcion.jpg</span></div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-1 site-img-wrap">
-        <img class="site-img" src="images/gallery/consultorio.jpg" alt="Consultorio dental" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-        <div class="gallery-item-inner img-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>consultorio.jpg</span></div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-2 site-img-wrap">
-        <img class="site-img" src="images/gallery/equipo-medico.jpg" alt="Equipo médico" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-        <div class="gallery-item-inner img-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>equipo-medico.jpg</span></div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-3 site-img-wrap">
-        <img class="site-img" src="images/gallery/doctor.jpg" alt="Doctora o doctor D'Arte Dental" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-        <div class="gallery-item-inner img-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>doctor.jpg</span></div>
-      </div>
-      <div class="gallery-item reveal site-img-wrap">
-        <img class="site-img" src="images/gallery/caso-antes-despues.jpg" alt="Caso antes y después" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-        <div class="gallery-item-inner img-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>caso-antes-despues.jpg</span></div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-1 site-img-wrap">
-        <img class="site-img" src="images/gallery/fachada.jpg" alt="Fachada Centro Morazán" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-        <div class="gallery-item-inner img-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>fachada.jpg</span></div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-2 site-img-wrap">
-        <img class="site-img" src="images/gallery/detalle-tratamiento.jpg" alt="Detalle de tratamiento" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-        <div class="gallery-item-inner img-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>detalle-tratamiento.jpg</span></div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-3 site-img-wrap">
-        <img class="site-img" src="images/gallery/sonrisa-paciente.jpg" alt="Sonrisa de paciente" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
-        <div class="gallery-item-inner img-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>sonrisa-paciente.jpg</span></div>
-      </div>
+  </div>
+  <div class="gallery-marquee reveal" aria-label="Galería de fotos del consultorio">
+    <div class="gallery-track">
+      <div class="gallery-slide"><img src="images/IMG_0301.jpeg" alt="D'Arte Dental — consultorio" loading="lazy"></div>
+      <div class="gallery-slide"><img src="images/IMG_0302.jpeg" alt="D'Arte Dental — espacios" loading="lazy"></div>
+      <div class="gallery-slide"><img src="images/IMG_0303.jpeg" alt="D'Arte Dental — clínica" loading="lazy"></div>
+      <div class="gallery-slide"><img src="images/IMG_0304.jpeg" alt="D'Arte Dental — tratamientos" loading="lazy"></div>
+      <div class="gallery-slide"><img src="images/IMG_0305.jpeg" alt="D'Arte Dental — detalle" loading="lazy"></div>
+      <div class="gallery-slide"><img src="images/IMG_0308.jpeg" alt="D'Arte Dental — sonrisas" loading="lazy"></div>
+      <!-- duplicate set for seamless loop -->
+      <div class="gallery-slide"><img src="images/IMG_0301.jpeg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="gallery-slide"><img src="images/IMG_0302.jpeg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="gallery-slide"><img src="images/IMG_0303.jpeg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="gallery-slide"><img src="images/IMG_0304.jpeg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="gallery-slide"><img src="images/IMG_0305.jpeg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="gallery-slide"><img src="images/IMG_0308.jpeg" alt="" loading="lazy" aria-hidden="true"></div>
     </div>
   </div>
 </section>
