@@ -576,6 +576,7 @@
   function renderGallery() {
     const section = document.querySelector('[data-section="gallery"]');
     const scroller = document.querySelector("[data-gallery-scroller]");
+    const nav = document.querySelector("[data-gallery-nav]");
     if (!section || !scroller) return;
 
     const images = Array.isArray(cfg.gallery) ? cfg.gallery.filter(Boolean) : [];
@@ -585,16 +586,20 @@
     }
 
     section.hidden = false;
-    scroller.innerHTML = images
-      .map(
-        (src, i) => `
+    if (nav) nav.hidden = true;
+
+    const itemHtml = (src, i, total, hidden) => `
       <figure class="gallery__item">
-        <img src="${escapeAttr(src)}" alt="${escapeAttr(
-          `${cfg.practice.name} — ${i + 1}`
-        )}" loading="lazy" decoding="async" />
-      </figure>`
-      )
-      .join("");
+        <img src="${escapeAttr(src)}" alt="${hidden ? "" : escapeAttr(`${cfg.practice.name} — ${i + 1}`)}"
+          loading="lazy" decoding="async"${hidden ? ' aria-hidden="true"' : ""} />
+      </figure>`;
+
+    scroller.classList.add("gallery__scroller--marquee");
+    scroller.innerHTML = `
+      <div class="gallery__track">
+        ${images.map((src, i) => itemHtml(src, i, images.length, false)).join("")}
+        ${images.map((src, i) => itemHtml(src, i, images.length, true)).join("")}
+      </div>`;
   }
 
   // -------------------------------------------------------------------------
