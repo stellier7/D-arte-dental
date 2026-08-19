@@ -770,7 +770,19 @@ body.nav-open {
   gap: 1.25rem;
 }
 
-/* When multiple dentists, enable horizontal scroll */
+/* Two dentists — side by side, no horizontal scroll */
+.dentists__grid[data-duo="true"] {
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .dentists__grid[data-duo="true"] {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Three or more — manual horizontal scroll only */
 .dentists__grid[data-scrollable="true"] {
   display: flex;
   overflow-x: auto;
@@ -779,6 +791,8 @@ body.nav-open {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding-bottom: 1rem;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
 }
 
 .dentists__grid[data-scrollable="true"]::-webkit-scrollbar {
@@ -896,15 +910,17 @@ body.nav-open {
   scroll-snap-type: none;
   padding: 0.25rem 0 1rem;
   margin: 0;
+  touch-action: pan-y;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
 
 .gallery__track {
   display: flex;
-  gap: 8px;
+  gap: 2px;
   width: max-content;
   animation: gallery-marquee 42s linear infinite;
+  will-change: transform;
 }
 
 .gallery__scroller--marquee:hover .gallery__track {
@@ -913,7 +929,7 @@ body.nav-open {
 
 @keyframes gallery-marquee {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 4px)); }
+  100% { transform: translateX(calc(-50% - 1px)); }
 }
 
 .gallery__item {
@@ -938,6 +954,9 @@ body.nav-open {
   scroll-snap-align: unset;
   scroll-snap-stop: normal;
   cursor: default;
+  border-radius: 0;
+  box-shadow: none;
+  transition: none;
 }
 
 .gallery__item img {
@@ -956,10 +975,6 @@ body.nav-open {
   .gallery__scroller--marquee .gallery__item {
     width: 300px;
     height: 220px;
-  }
-
-  .gallery__track {
-    gap: 10px;
   }
 }
 
