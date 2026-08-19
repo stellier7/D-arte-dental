@@ -1,19 +1,19 @@
-# D'Arte Dental — Sitio web
+# D'Arte Dental — Template Option (Pitch B)
 
-Sitio web de la clínica dental D'Arte Dental en Centro Morazán, Tegucigalpa.
+This branch (`cursor/template-option-dde3`) is an **alternate design** for client review.
 
-## Despliegue en Vercel
+| Branch | Design | Vibe |
+|--------|--------|------|
+| `main` | Custom single-page | Gallery / editorial — Fraunces serif, warm canvas, art-inspired |
+| `cursor/template-option-dde3` | `dentist-template` | Clean clinical — modern sans, bilingual ES/EN, config-driven |
 
-1. Importa el repo **stellier7/D-arte-dental** en [vercel.com](https://vercel.com)
-2. Framework preset: **Other** (sitio estático, sin build)
-3. Deploy — `index.html` en la raíz se sirve automáticamente
+## Deploy on Vercel
 
-## Agregar fotos
+Create a **second Vercel project** (or preview deployment) pointed at branch `cursor/template-option-dde3`.
 
-Sube las imágenes aquí: **https://github.com/stellier7/D-arte-dental/tree/main/images**
+- Framework: **Other** (static)
+- No build step
 
-Ver la guía completa en [`images/README.md`](images/README.md).
+## Customize
 
-## Desarrollo local
-
-Abre `index.html` en el navegador — no requiere servidor ni dependencias.
+Edit `js/config.js` for all practice content. Images live in `assets/images/`.
