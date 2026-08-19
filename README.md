@@ -2,9 +2,11 @@
 
 Sitio web de la clínica dental D'Arte Dental en Centro Morazán, Tegucigalpa.
 
-## Sitio en vivo
+## Despliegue en Vercel
 
-**https://stellier7.github.io/D-arte-dental/**
+1. Importa el repo **stellier7/D-arte-dental** en [vercel.com](https://vercel.com)
+2. Framework preset: **Other** (sitio estático, sin build)
+3. Deploy — `index.html` en la raíz se sirve automáticamente
 
 ## Agregar fotos
 
